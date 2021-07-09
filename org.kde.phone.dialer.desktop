@@ -69,5 +69,5 @@ Type=Application
 Icon=dialer
 Exec=plasmaphonedialer %u
 Categories=Qt;KDE;Telephony;Network;
-
 MimeType=x-scheme-handler/tel
+InitialPreference=10
