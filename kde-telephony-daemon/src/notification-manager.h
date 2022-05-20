@@ -5,7 +5,6 @@
 #pragma once
 
 #include <KNotification>
-#include <MprisQt/MprisManager>
 #include <QtFeedback/QFeedbackEffect>
 
 #include "callutilsinterface.h"
@@ -44,9 +43,6 @@ private:
     void accept(const QString &deviceUni, const QString &callUni);
     void hangUp(const QString &deviceUni, const QString &callUni);
 
-    void pauseMedia();
-    void unpauseMedia();
-
     void handleIncomingCall(const QString &deviceUni, const QString &callUni, const QString communicationWith);
     void handleRejectedCall();
 
@@ -54,7 +50,4 @@ private:
     ContactUtils *_contactUtils;
 
     std::unique_ptr<QFeedbackHapticsEffect> _ringEffect;
-
-    MprisManager _mprisManager;
-    QSet<QString> _pausedSources;
 };
