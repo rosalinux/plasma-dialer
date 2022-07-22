@@ -18,6 +18,9 @@ import "../dialpad"
 
 Kirigami.Page {
     id: callPage
+    background: Rectangle {
+        color: "#437431"
+    }
 
     function activeDeviceUni() {
         return applicationWindow().selectModem()

@@ -16,6 +16,10 @@ Kirigami.ScrollablePage {
     title: i18n("Call History")
     icon.name: "clock"
     
+    background: Rectangle {
+        color: "#437431"
+    }
+
     header: ColumnLayout {
         anchors.margins: Kirigami.Units.smallSpacing
         spacing: Kirigami.Units.smallSpacing
