@@ -1,5 +1,14 @@
 <RCC>
     <qresource prefix="/">
+        <file alias="icon-handset-hangup">icons/icon-handset-hangup.png</file>
+        <file alias="icons-vol-mute">icons/icons-vol-mute.png</file>
+        <file alias="icons-vol-up">icons/icons-vol-up.png</file>
+        <file alias="icons-mic">icons/icons-mic.png</file>
+        <file alias="icons-mic-off">icons/icons-mic-off.png</file>
+        <file alias="icon-dialer">icons/icon-dialer.png</file>
+
+        <file alias="font-manrope">fonts/Manrope-Regular.ttf</file>
+
         <file alias="main.qml">qml/main.qml</file>
         <file alias="components/SidebarButton.qml">qml/components/SidebarButton.qml</file>
         <file alias="components/Sidebar.qml">qml/components/Sidebar.qml</file>

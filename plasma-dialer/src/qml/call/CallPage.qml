@@ -18,9 +18,11 @@ import "../dialpad"
 
 Kirigami.Page {
     id: callPage
-    background: Rectangle {
-        color: "#437431"
-    }
+
+    leftPadding: 0
+    rightPadding: 0
+    topPadding: 0
+    bottomPadding: 0
 
     function activeDeviceUni() {
         return applicationWindow().selectModem()
@@ -56,82 +58,146 @@ Kirigami.Page {
 
     ColumnLayout {
         id: activeCallUi
-        spacing: Kirigami.Units.largeSpacing
 
         anchors {
             fill: parent
-            margins: Kirigami.Units.largeSpacing
+            //margins: Kirigami.Units.largeSpacing
         }
 
-        Controls.SwipeView {
-            id: activeCallSwipeView
-
+        Rectangle {
+            id: info
             Layout.fillWidth: true
-            Layout.fillHeight: true
-            Layout.minimumHeight: parent.height / 2
+            height: 690
 
-            ActiveCallView {
-                id: activeCallView
-            }
+            Rectangle {
+                color: "#437431"
+                y: 87
+                width: 172
+                height: 172
 
-            Dialpad {
-                id: dialPad
-                showBottomRow: false
-                focus: true
-            }
-        }
-
-        // phone number/alias
-        Controls.Label {
-            Layout.fillWidth: true
-            Layout.minimumHeight: implicitHeight
-            horizontalAlignment: Qt.AlignHCenter
-            verticalAlignment: Qt.AlignVCenter
-            font.pointSize: Kirigami.Theme.defaultFont.pointSize * 1.15
-            text: ContactUtils.displayString("")
-            font.bold: true
-            visible: text != ""
-        }
-        
-        // time spent on call
-        Controls.Label {
-            Layout.fillWidth: true
-            Layout.minimumHeight: implicitHeight
-            horizontalAlignment: Qt.AlignHCenter
-            verticalAlignment: Qt.AlignVCenter
-            font.pointSize: Kirigami.Theme.defaultFont.pointSize * 1.1
-            text: {
-                if (callActive) {
-                    return i18n("Calling...");
-                } else if (callDuration > 0) {
-                    return secondsToTimeString(callDuration);
-                } else {
-                    return '';
+                anchors.horizontalCenter: info.horizontalCenter
+                Controls.Label {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.verticalCenter: parent.verticalCenter
+                    font.family: "Manrope"
+                    font.pixelSize: 120
+                    color: "#FFFFFF"
+                    text: {
+                        return contact.text.substr(0, 1).toUpperCase();
+                    }
                 }
             }
-            visible: text !== ""
+            // time spent on call
+            Controls.Label {
+                Layout.fillWidth: true
+                Layout.minimumHeight: implicitHeight
+                horizontalAlignment: Qt.AlignHCenter
+                verticalAlignment: Qt.AlignVCenter
+                text: {
+                        return i18n("Calling...");
+                }
+                font.family: "Manrope"
+                font.pixelSize: 26
+                color: "#444444"
+                y: 312
+                anchors.horizontalCenter: info.horizontalCenter
+            }
+            // phone number/alias
+            Controls.Label {
+                id: phone
+                Layout.fillWidth: true
+                Layout.minimumHeight: implicitHeight
+                horizontalAlignment: Qt.AlignHCenter
+                verticalAlignment: Qt.AlignVCenter
+                font.family: "Manrope"
+                font.pixelSize: 56
+                lineHeight: 48
+                minimumPixelSize: 56
+                maximumLineCount: 3
+                text: getPage("Dialer").pad.number
+                color: "#444444"
+                width: 620
+                height: 120
+                y: 402
+                anchors.horizontalCenter: info.horizontalCenter
+            }
+            // contact name
+            Controls.Label {
+                id: contact
+                //Layout.fillWidth: true
+                Layout.minimumHeight: implicitHeight
+                horizontalAlignment: Qt.AlignHCenter
+                verticalAlignment: Qt.AlignVCenter
+                maximumLineCount: 3
+
+                width: 620
+                height: 120
+
+                font.family: "Manrope"
+                font.pixelSize: 40
+                color: "#444444"
+
+                text: ContactUtils.displayString(phone.text)
+                y: 503
+                anchors.horizontalCenter: info.horizontalCenter
+                wrapMode: Text.WordWrap
+                elide: Text.ElideMiddle
+            }
         }
 
         // controls
-        RowLayout {
-            opacity: callActive ? 1 : 0
-            Layout.alignment: Qt.AlignHCenter
-            Layout.maximumWidth: Kirigami.Units.gridUnit * 16
-            Layout.minimumHeight: Kirigami.Units.gridUnit * 3.5
-            id: buttonRow
-            
-            spacing: Kirigami.Units.smallSpacing
-            
+        Rectangle {
+            color: "#437431"
+
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+
+            CallPageButton {
+                id: speakerButton
+                width: 296
+                height: 164
+                x: 50
+                y: 75
+                
+                iconSource: ":icons-vol-mute"
+                text: i18n("Speaker")
+                
+                onClicked: {
+                    const speakerMode = !toggledOn;
+                    DialerUtils.setSpeakerMode(speakerMode);
+                    iconSource = toggledOn ? ":icons-vol-mute" : ":icons-vol-up";
+                }
+            }
+            CallPageButton {
+                id: muteButton
+
+                width: 296
+                height: 164
+                x: 374
+                y: 75
+
+                iconSource: ":icons-mic-off"
+                text: i18n("Mute")
+
+                onClicked: {
+                    const micMute = !toggledOn;
+                    DialerUtils.setMute(micMute);
+                    iconSource = toggledOn ? ":icons-mic-off" : ":icons-mic";
+                }
+            }
             CallPageButton {
                 id: dialerButton
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-                
-                iconSource: "input-dialpad-symbolic"
+
+                width: 187
+                height: 164
+                x: 50
+                y: 481
+
+                iconSource: ":icon-dialer"
                 text: i18n("Keypad")
-                
+
                 onClicked: switchToogle()
-                toggledOn: (activeCallSwipeView.currentIndex == 1)
+                toggledOn: false
 
                 function switchToogle() {
                     // activeCallSwipeView: 0 is ActiveCallView, 1 is Dialpad
@@ -143,78 +209,18 @@ Kirigami.Page {
                 }
             }
             CallPageButton {
-                id: speakerButton
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-                
-                iconSource: "audio-speakers-symbolic"
-                text: i18n("Speaker")
-                
-                onClicked: {
-                    const speakerMode = !toggledOn
-                    DialerUtils.setSpeakerMode(speakerMode);
-                }
-            }
-            CallPageButton {
-                id: muteButton
-
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-
-                iconSource: toggledOn ? "microphone-sensitivity-muted-symbolic" : "microphone-sensitivity-high-symbolic"
-                text: i18n("Mute")
-
-                onClicked: {
-                    const micMute = !toggledOn
-                    DialerUtils.setMute(micMute)
-                }
-            }
-        }
-
-        Item {
-            Layout.minimumHeight: Kirigami.Units.gridUnit * 5
-            Layout.fillWidth: true
-
-            AnswerSwipe {
-                anchors.fill: parent
-                visible: false // TODO
-                onAccepted: {
-                    CallUtils.accept(activeDeviceUni(), activeCallUni());
-                }
-                onRejected: {
-                    CallUtils.hangUp(activeDeviceUni(), activeCallUni());
-                }
-            }
-            
-            // end call button
-            Controls.AbstractButton {
                 id: endCallButton
+
+                width: 404
+                height: 164
+                x: 266
+                y: 481
+
+                iconSource: ":icon-handset-hangup"
                 visible: callActive
                 
-                anchors.centerIn: parent
-                width: Kirigami.Units.gridUnit * 3.5
-                height: Kirigami.Units.gridUnit * 3.5
-                
                 onClicked: {
                     CallUtils.hangUp(activeDeviceUni(), activeCallUni());
-                }
-                
-                background: Rectangle {
-                    anchors.centerIn: parent
-                    height: Kirigami.Units.gridUnit * 3.5
-                    width: height
-                    radius: height / 2
-                    
-                    color: "red"
-                    opacity: endCallButton.pressed ? 0.5 : 1
-                    
-                    Kirigami.Icon {
-                        source: "call-stop"
-                        anchors.fill: parent
-                        anchors.margins: Kirigami.Units.largeSpacing
-                        color: "white"
-                        isMask: true
-                    }
                 }
             }
         }
