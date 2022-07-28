@@ -46,8 +46,4 @@ Item {
         onClicked: buttonRoot.pressed()
         onPressAndHold: buttonRoot.pressAndHold()
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 93336cc (incoming call improvement)
