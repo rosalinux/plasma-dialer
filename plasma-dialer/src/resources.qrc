@@ -32,7 +32,7 @@
         <file alias="btn-stargr">icons/btn-stargr.png</file>
         <file alias="icon-clear">icons/icon-clear.png</file>
         <file alias="icon-plus">icons/icon-plus.png</file>
-
+        <file alias="icon-person">icons/icon-person.png</file>
         <file alias="main.qml">qml/main.qml</file>
         <file alias="components/SidebarButton.qml">qml/components/SidebarButton.qml</file>
         <file alias="components/Sidebar.qml">qml/components/Sidebar.qml</file>
@@ -45,6 +45,7 @@
         <file alias="call/InCallInlineMessage.qml">qml/call/InCallInlineMessage.qml</file>
         <file alias="call/AnswerSwipe.qml">qml/call/AnswerSwipe.qml</file>
         <file alias="call/CallPage.qml">qml/call/CallPage.qml</file>
+        <file alias="call/IncomingPage.qml">qml/call/IncomingPage.qml</file>
         <file alias="call/Avatar.qml">qml/call/Avatar.qml</file>
         <file alias="call/ActiveCallView.qml">qml/call/ActiveCallView.qml</file>
         <file alias="call/CallPageButton.qml">qml/call/CallPageButton.qml</file>
@@ -52,6 +53,7 @@
         <file alias="dialpad/Dialpad.qml">qml/dialpad/Dialpad.qml</file>
         <file alias="dialpad/DialerButton.qml">qml/dialpad/DialerButton.qml</file>
         <file alias="dialpad/DialerIconButton.qml">qml/dialpad/DialerIconButton.qml</file>
+        <file alias="dialpad/DialerRosaButton.qml">qml/dialpad/DialerRosaButton.qml</file>
         <file alias="USSDSheet.qml">qml/USSDSheet.qml</file>
         <file alias="ImeiSheet.qml">qml/ImeiSheet.qml</file>
         <file alias="PhoneNumberDialog.qml">qml/PhoneNumberDialog.qml</file>
