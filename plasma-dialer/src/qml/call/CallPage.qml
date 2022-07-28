@@ -27,9 +27,8 @@ Kirigami.Page {
     }
 
     property bool callActive: ActiveCallModel.active
-    property int callState: ActiveCallModel.callState
     property int callDuration: ActiveCallModel.callDuration
-
+    
     title: i18n("Active call list")
 
     function secondsToTimeString(seconds) {
@@ -98,7 +97,7 @@ Kirigami.Page {
             verticalAlignment: Qt.AlignVCenter
             font.pointSize: Kirigami.Theme.defaultFont.pointSize * 1.1
             text: {
-                if (callState === DialerTypes.CallState.Dialing || callState === DialerTypes.CallState.RingingOut) {
+                if (callActive) {
                     return i18n("Calling...");
                 } else if (callDuration > 0) {
                     return secondsToTimeString(callDuration);
