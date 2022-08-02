@@ -189,6 +189,7 @@ Kirigami.Page {
                 //iconSource: ":icons-mic"
                 iconSource: ":btn-mic-on"
                 text: i18n("Mute")
+                visible: false
 
                 onClicked: {
                     const micMute = !toggledOn;
@@ -219,6 +220,7 @@ Kirigami.Page {
                 Layout.minimumHeight: implicitHeight
                 horizontalAlignment: Qt.AlignHCenter
                 verticalAlignment: Qt.AlignVCenter
+                visible: false
             }
 
             CallPageButton {
@@ -231,6 +233,7 @@ Kirigami.Page {
                 //iconSource: ":icons-vol-mute"
                 iconSource: ":btn-vol"
                 text: i18n("Speaker")
+                visible: false
                 
                 onClicked: {
                     const speakerMode = !toggledOn;
@@ -260,8 +263,10 @@ Kirigami.Page {
                 Layout.minimumHeight: implicitHeight
                 horizontalAlignment: Qt.AlignHCenter
                 verticalAlignment: Qt.AlignVCenter
+                visible: false
             }
 
+/*
             CallPageButton {
                 id: dialerButton
 
@@ -286,12 +291,14 @@ Kirigami.Page {
                     }
                 }
             }
+*/
             CallPageButton {
                 id: endCallButton
 
                 width: 404
                 height: 164
-                x: 266
+//                x: 266
+                x: 158
                 y: 481
 
                 //iconSource: ":icon-handset-hangup"
