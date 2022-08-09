@@ -93,6 +93,7 @@ Kirigami.Page {
             id: info
             Layout.fillWidth: true
             height: 1050
+            color: "#EAE9E9"
 
             Rectangle {
                 color: getColorForContact(contact.text.substr(0, 1).toUpperCase())
