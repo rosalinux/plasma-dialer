@@ -49,12 +49,12 @@ Kirigami.Page {
 
         Rectangle {
             id: topSide
-            color: "#C4C4C4"
+            color: "#EAE9E9"
             parent: mainRect
             anchors.top: parent.top
             anchors.right: parent.right
             anchors.left: parent.left
-            height: parent.height / 2
+            height: 785
             width: parent.width
 
             // somebody calls label
@@ -131,7 +131,7 @@ Kirigami.Page {
             anchors.bottom: parent.bottom
             anchors.right: parent.right
             anchors.left: parent.left
-            height: parent.height / 2
+            height: 815
             width: parent.width
 
             //accept call button
