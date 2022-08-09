@@ -18,6 +18,9 @@ Kirigami.AbstractCard {
         id: container
         parent: root
         anchors.fill: parent
+        property var unknownPerson : false
+        property var currentAbonent : getContactFromPhonebook(model.communicationWith)
+                
 
          Rectangle {
                 id: historyPersonIconContainer
@@ -26,16 +29,36 @@ Kirigami.AbstractCard {
                 anchors.top: parent.top
                 anchors.leftMargin : 20
                 anchors.topMargin : 20
-                color: "#999999"
+                color: {
+                    if (container.currentAbonent == "Неизвестный номер") { 
+                        container.unknownPerson = true;
+                        return "#999999"
+                    } else {
+                        return getColorForContact(container.currentAbonent.substr(0, 1).toUpperCase())
+                    }
+                }
                 width: 93
                 height: 93
                 radius: 5.23
                 
                 Kirigami.Icon {
+                    visible: container.unknownPerson
                     parent: historyPersonIconContainer
                     anchors.fill: parent
                     color: "white"
                     source: ":icon-person"
+                }
+
+                Controls.Label {
+                    visible: !container.unknownPerson
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.verticalCenter: parent.verticalCenter
+                    font.family: "Manrope"
+                    font.pixelSize: 100
+                    color: "#FFFFFF"
+                    text: {
+                        return container.currentAbonent.substr(0, 1).toUpperCase();
+                    }
                 }
         }
 
@@ -68,13 +91,14 @@ Kirigami.AbstractCard {
            anchors.top: container.top
            //anchors.bottom: container.bottom
 
-           anchors.topMargin : 20
-           anchors.rightMargin: 20
+           anchors.topMargin : 30
+           anchors.rightMargin: 30
 
             Kirigami.Icon {
                 id: inOrOutCallIcon
-                width: 37.12
-                height: 37
+                //width: 37.12
+                width: 40
+                height: 40
                 source: {
                     if (model.direction == DialerTypes.CallDirection.Incoming) {
                         return ":icon-call-missed"
@@ -88,6 +112,9 @@ Kirigami.AbstractCard {
 
             Controls.Label {
                 text: secondsToTimeString(model.duration)
+                anchors.top: inOrOutCallIcon.bottom
+                anchors.verticalCenter: inOrOutCallIcon.verticalCenter
+                
                 color: "#C4C4C4"
                 font.family: "Manrope"
                 font.pixelSize: 20
