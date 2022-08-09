@@ -111,10 +111,25 @@ Kirigami.ScrollablePage {
         return '' + h + ':' + m + ':' + s;
     }
 
+     function getColorForContact(ch) {
+        var colors = {
+            0: "green",
+            1: "red",
+            2: "yellow",
+            3: "blue",
+            4: "orange",
+            5: "olive",
+            6: "violet",
+        };
+        return colors[ch.charCodeAt(0) % 7];
+    }
+
+
     function getContactFromPhonebook(adressee) {
         var contactNameFromBook = ContactUtils.displayString(adressee)
+        
         console.log(contactNameFromBook)
-            return contactNameFromBook === adressee ? "Неизвестный номер" : contactNameFromBook
+        return contactNameFromBook === adressee ? "Неизвестный номер" : contactNameFromBook
 
     }
     
