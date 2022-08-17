@@ -100,7 +100,7 @@ Kirigami.Page {
                         id: statusLabel
                         horizontalAlignment: Qt.AlignHCenter
                         verticalAlignment: Qt.AlignVCenter
-                        width: 620
+                        width: 600
                         height: 38
                         Layout.maximumWidth: width
                         Layout.minimumWidth: width
@@ -117,7 +117,7 @@ Kirigami.Page {
                         id: delButton
                         Layout.fillWidth: true
                         Layout.fillHeight: true
-                        width: 46
+                        width: 86
                         height: 31
 
                         enabled: statusLabel.text.length > 0
