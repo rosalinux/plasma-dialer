@@ -19,7 +19,6 @@ Kirigami.AbstractCard {
         parent: root
         anchors.fill: parent
         property var currentAbonent : getContactFromPhonebook(model.communicationWith)
-                
 
          Rectangle {
                 id: historyPersonIconContainer
@@ -31,7 +30,7 @@ Kirigami.AbstractCard {
                 width: 93
                 height: 93
                 radius: 5.23
-                
+
                 Kirigami.Icon {
                     parent: historyPersonIconContainer
                     anchors.fill: parent
@@ -42,9 +41,8 @@ Kirigami.AbstractCard {
                         } else {
                             return getContactIcon(container.currentAbonent)
                         }
-                    }   
+                    }
                 }
-                
         }
 
         ColumnLayout {
@@ -102,4 +100,3 @@ Kirigami.AbstractCard {
         }
     }
 }
-

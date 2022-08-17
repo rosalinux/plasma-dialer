@@ -47,7 +47,6 @@ Kirigami.ScrollablePage {
                         anchors.fill: parent
                         source: ":btn-recgr"
                     }
-
                 }
 
                 Item {
@@ -87,7 +86,6 @@ Kirigami.ScrollablePage {
         width: 187
         height: 164
         
-        
         Kirigami.Icon{
             anchors.fill: parent
             source: toDialerButton.pressed ? ":btn-dialercontact-all-pressed" : ":btn-dialercontact-all"
@@ -100,7 +98,6 @@ Kirigami.ScrollablePage {
                 switchToPage(getPage("Dialer"), 0)
             }
         }
-  
     }
 
     function secondsToTimeString(seconds) {
@@ -115,10 +112,8 @@ Kirigami.ScrollablePage {
 
     function getContactFromPhonebook(adressee) {
         var contactNameFromBook = ContactUtils.displayString(adressee)
-        
         console.log(contactNameFromBook)
         return contactNameFromBook === adressee ? "Неизвестный номер" : contactNameFromBook
-
     }
     
     Kirigami.PlaceholderMessage {
@@ -128,18 +123,9 @@ Kirigami.ScrollablePage {
         visible: view.count == 0
     }
     
-
     Kirigami.CardsListView {
         id: view
         model: CallHistoryModel
-        /*
-        section {
-            property: "date"
-            delegate: Kirigami.ListSectionHeader {
-                label: Qt.formatDate(section, Qt.locale().dateFormat(Locale.LongFormat));
-            }
-        }
-        */
         delegate: HistoryDelegate {}
     }
 }
